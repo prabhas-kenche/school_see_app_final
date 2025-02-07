@@ -7,6 +7,7 @@ import 'resul_tpage.dart';
 import 'busTrackingScreen.dart';
 import 'navigation.dart';
 import 'qa-game.dart';
+import 'smart-calender.dart';
 
 void main() {
   runApp(const MyApp());
@@ -116,7 +117,7 @@ class DashboardScreen extends StatelessWidget {
                   childAspectRatio: 0.8,
                   children: [
                     _DashboardCard(
-                      title: 'Student Attendance',
+                      title: 'Attendance',
                       icon: Icons.person_rounded,
                       onTap: () {
                         Navigator.push(
@@ -170,14 +171,14 @@ class DashboardScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Navigation(initialScreen: const PlaceholderScreen(title: 'School Calendar')),
+                            builder: (context) => Navigation(initialScreen: SmartCalenderPage()),
                           ),
                         );
                       },
                     ),
                     _DashboardCard(
-                      title: 'Assignments',
-                      icon: Icons.assignment,
+                      title: 'Time Table',
+                      icon: Icons.schedule,
                       onTap: () {
                         Navigator.push(
                           context,
