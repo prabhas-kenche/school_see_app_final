@@ -174,17 +174,37 @@ class _DashboardScreenState extends State<DashboardScreen> {
   // Show exit confirmation dialog
   Future<bool> _showExitConfirmation() async {
     bool? shouldExit = await showDialog(
-      context: context,
+      context: context, // Use context directly
       builder: (context) => AlertDialog(
-        title: const Text('Exit ?'),
-        content: const Text('Do you want to exit the app?'),
+        backgroundColor: const Color(0xFFE0E5EC),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        title: const Center(
+          child: Text(
+            'Exit ?',
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          ),
+        ),
+        content: const Padding(
+          padding: EdgeInsets.only(top: 0.0), // Reduce space between title and content
+          child: Text(
+            'Are you sure ?',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        actionsAlignment: MainAxisAlignment.center, // Center buttons closer
+        actionsPadding: const EdgeInsets.symmetric(vertical: 10.0), // Adjust padding between buttons
         actions: [
           TextButton(
-            onPressed: () => exit(0), // Exit the app
+            style: TextButton.styleFrom(
+                backgroundColor: const Color(0xFF2C672D), foregroundColor: Colors.white),
+            onPressed: () => exit(0),
             child: const Text('Yes'),
           ),
+          SizedBox(width: 50), // Add gap between buttons
           TextButton(
-            onPressed: () => Navigator.of(context).pop(false), // Stay in the app
+            style: TextButton.styleFrom(
+                backgroundColor: const Color(0xFFAF362D), foregroundColor: Colors.white),
+            onPressed: () => Navigator.of(context).pop(false),
             child: const Text('No'),
           ),
         ],
@@ -192,6 +212,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
     return shouldExit ?? false;
   }
+
+
+
 }
 
 class _DashboardCard extends StatelessWidget {

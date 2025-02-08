@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'otp_verification.dart';
 import 'dart:ui';
+import 'main.dart';
 
 void main() {
   runApp(const ResetPasswordApp());
@@ -39,7 +40,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   // Move the controllers here
   final TextEditingController newPasswordController = TextEditingController();
   final TextEditingController confirmPasswordController =
-      TextEditingController();
+  TextEditingController();
   final TextEditingController parentNumberController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
@@ -56,7 +57,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               child: IconButton(
                 icon: const Icon(Icons.arrow_back_ios,
                     color: Colors.white, size: 30),
-                onPressed: () => Navigator.pop(context),
+                onPressed: () => Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SchoolSeeApp()),
+                ),
               ),
             ),
           ),
@@ -118,7 +122,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         ),
                         child: const Text("Send",
                             style:
-                                TextStyle(fontSize: 16, color: Colors.black)),
+                            TextStyle(fontSize: 16, color: Colors.black)),
                       ),
                     ),
                   ],
@@ -154,7 +158,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 decoration: BoxDecoration(
                   border: Border(bottom: BorderSide(color: Colors.grey)),
                   color:
-                      const Color.fromARGB(255, 189, 189, 189).withOpacity(0.1),
+                  const Color.fromARGB(255, 189, 189, 189).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     BoxShadow(
@@ -187,7 +191,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     ),
                     hintText: hint,
                     hintStyle:
-                        TextStyle(color: Colors.black45.withOpacity(0.6)),
+                    TextStyle(color: Colors.black45.withOpacity(0.6)),
                     filled: true,
                     fillColor: Colors.transparent,
                     contentPadding: const EdgeInsets.symmetric(
@@ -235,7 +239,7 @@ Widget _buildTextField(
               decoration: BoxDecoration(
                 border: Border(bottom: BorderSide(color: Colors.grey)),
                 color:
-                    const Color.fromARGB(255, 189, 189, 189).withOpacity(0.1),
+                const Color.fromARGB(255, 189, 189, 189).withOpacity(0.1),
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
                   BoxShadow(
@@ -259,7 +263,7 @@ Widget _buildTextField(
                   filled: true,
                   fillColor: Colors.transparent,
                   contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                   border: InputBorder.none,
                 ),
                 validator: (value) {
