@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'attendence_page.dart';
 import 'digitalclasses.dart';
 import 'fee_status.dart';
@@ -8,6 +9,8 @@ import 'busTrackingScreen.dart';
 import 'navigation.dart';
 import 'qa-game.dart';
 import 'smart-calender.dart';
+import 'time_table.dart';
+import 'dart:io'; // Added for app exit functionality
 
 void main() {
   runApp(const MyApp());
@@ -28,198 +31,166 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
 
   @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  final CarouselSliderController _carouselController = CarouselSliderController();
+  int _currentIndex = 0;
+
+  final List<String> carouselImages = [
+    'assets/images/school.png',
+    'assets/images/school1.png',
+    'assets/images/sports.png',
+    'assets/images/school.png',
+    'assets/images/school1.png',
+  ];
+
+  @override
   Widget build(BuildContext context) {
-    // Image constants
-    const String schoolImage = 'assets/images/school.png';
-    const String school1Image = 'assets/images/school1.png';
-    const String sportsImage = 'assets/images/sports.png';
-
-    // Carousel image list
-    final List<String> carouselImages = [schoolImage, school1Image, sportsImage];
-
-    return Scaffold(
-      backgroundColor: const Color(0xFFF5F7FB),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // User Info and Avatar
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'School See!',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        'Where the students store their data',
-                        style: TextStyle(color: Colors.grey, fontSize: 14),
-                      ),
-                    ],
-                  ),
-                  const CircleAvatar(
-                    radius: 30,
-                    backgroundImage: AssetImage('assets/images/school_see_logo.png'),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              // Carousel Slider
-              CarouselSlider(
-                options: CarouselOptions(
-                  height: 150.0,
-                  autoPlay: true,
-                  autoPlayInterval: const Duration(seconds: 2),
-                  autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                  enlargeCenterPage: true,
-                  viewportFraction: 0.9,
-                ),
-                items: carouselImages.map((imageUrl) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          image: DecorationImage(
-                            image: AssetImage(imageUrl),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                }).toList(),
-              ),
-              const SizedBox(height: 20),
-              // Dashboard Items
-              Expanded(
-                child: GridView.count(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 0.8,
+    return WillPopScope(
+      onWillPop: _showExitConfirmation, // Intercept back button press
+      child: Scaffold(
+        backgroundColor: const Color(0xFFF5F7FB),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _DashboardCard(
-                      title: 'Attendance',
-                      icon: Icons.person_rounded,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Navigation(initialScreen: const AttendencePage()),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'School See!',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
                           ),
-                        );
-                      },
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          'Where the students store their data',
+                          style: TextStyle(color: Colors.grey, fontSize: 14),
+                        ),
+                      ],
                     ),
-                    _DashboardCard(
-                      title: 'Digital Classes',
-                      icon: Icons.cast_for_education,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Navigation(initialScreen: const Digitalclasses()),
-                          ),
-                        );
-                      },
-                    ),
-                    _DashboardCard(
-                      title: 'Fee Status',
-                      icon: Icons.payment,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Navigation(initialScreen: FeeStatusPage()),
-                          ),
-                        );
-                      },
-                    ),
-                    _DashboardCard(
-                      title: 'Bus Tracking',
-                      icon: Icons.directions_bus,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Navigation(initialScreen: BusTrackingScreen()),
-                          ),
-                        );
-                      },
-                    ),
-                    _DashboardCard(
-                      title: 'School Calendar',
-                      icon: Icons.calendar_month,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Navigation(initialScreen: SmartCalenderPage()),
-                          ),
-                        );
-                      },
-                    ),
-                    _DashboardCard(
-                      title: 'Time Table',
-                      icon: Icons.schedule,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Navigation(initialScreen: const PlaceholderScreen(title: 'Assignments')),
-                          ),
-                        );
-                      },
-                    ),
-                    _DashboardCard(
-                      title: 'Results',
-                      icon: Icons.bar_chart,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Navigation(initialScreen: ResultsPage()),
-                          ),
-                        );
-                      },
-                    ),
-                    _DashboardCard(
-                      title: 'QA Game',
-                      icon: Icons.videogame_asset,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Navigation(initialScreen: QAExamScreen()),
-                          ),
-                        );
-                      },
+                    const CircleAvatar(
+                      radius: 30,
+                      backgroundImage: AssetImage('assets/images/school_see_logo.png'),
                     ),
                   ],
                 ),
-              ),
-            ],
+                const SizedBox(height: 20),
+                CarouselSlider(
+                  items: carouselImages.map((imageUrl) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width,
+                          margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            image: DecorationImage(
+                              image: AssetImage(imageUrl),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }).toList(),
+                  options: CarouselOptions(
+                    height: 150.0,
+                    autoPlay: true,
+                    autoPlayInterval: const Duration(seconds: 2),
+                    autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    enlargeCenterPage: true,
+                    viewportFraction: 0.9,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        _currentIndex = index;
+                      });
+                    },
+                  ),
+                  carouselController: _carouselController,
+                ),
+                const SizedBox(height: 10),
+                Center(
+                  child: AnimatedSmoothIndicator(
+                    activeIndex: _currentIndex,
+                    count: carouselImages.length,
+                    effect: const ExpandingDotsEffect(
+                      dotHeight: 8,
+                      dotWidth: 8,
+                      activeDotColor: Colors.blueGrey,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 15),
+                Expanded(
+                  child: GridView.count(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 0.9,
+                    children: [
+                      _DashboardCard(title: 'Attendance', icon: Icons.person_rounded, onTap: () => _navigateTo(const AttendencePage())),
+                      _DashboardCard(title: 'Digital Classes', icon: Icons.cast_for_education, onTap: () => _navigateTo(const Digitalclasses())),
+                      _DashboardCard(title: 'Fee Status', icon: Icons.payment, onTap: () => _navigateTo(FeeStatusPage())),
+                      _DashboardCard(title: 'Bus Tracking', icon: Icons.directions_bus, onTap: () => _navigateTo(BusTrackingScreen())),
+                      _DashboardCard(title: 'School Calendar', icon: Icons.calendar_month, onTap: () => _navigateTo(SmartCalenderPage())),
+                      _DashboardCard(title: 'Time Table', icon: Icons.schedule, onTap: () => _navigateTo(TimeTableScreen())),
+                      _DashboardCard(title: 'Results', icon: Icons.bar_chart, onTap: () => _navigateTo(ResultsPage())),
+                      _DashboardCard(title: 'QA Game', icon: Icons.videogame_asset, onTap: () => _navigateTo(QAExamScreen())),
+                      _DashboardCard(title: 'My Library', icon: Icons.local_library_outlined, onTap: () => _navigateTo(QAExamScreen())),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  void _navigateTo(Widget screen) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Navigation(initialScreen: screen)),
+    );
+  }
+
+  // Show exit confirmation dialog
+  Future<bool> _showExitConfirmation() async {
+    bool? shouldExit = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Exit ?'),
+        content: const Text('Do you want to exit the app?'),
+        actions: [
+          TextButton(
+            onPressed: () => exit(0), // Exit the app
+            child: const Text('Yes'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false), // Stay in the app
+            child: const Text('No'),
+          ),
+        ],
+      ),
+    );
+    return shouldExit ?? false;
   }
 }
 
@@ -270,18 +241,3 @@ class _DashboardCard extends StatelessWidget {
     );
   }
 }
-
-class PlaceholderScreen extends StatelessWidget {
-  final String title;
-
-  const PlaceholderScreen({required this.title, super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(title)),
-      body: Center(child: Text('$title Screen')),
-    );
-  }
-}
-

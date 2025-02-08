@@ -59,7 +59,7 @@ class AdminLoginPage extends StatelessWidget {
                   ),
                   child: CircleAvatar(
                     radius: 70,
-                    backgroundColor: Colors.white,
+                    backgroundColor: const Color(0xFFE0E5EC),
                     backgroundImage: const AssetImage(
                       'assets/images/school_see_logo.png', // Ensure this path is correct
                     ),
@@ -253,6 +253,7 @@ class _LoginFormState extends State<_LoginForm> {
 }
 
 // }
+
 
 class ForgetPasswordPage extends StatelessWidget {
   const ForgetPasswordPage({super.key});

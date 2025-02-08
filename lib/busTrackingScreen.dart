@@ -39,79 +39,88 @@ class BusTrackingScreen extends StatelessWidget {
 
           // Top Bar with Bus No, Call and Message Icons
           Positioned(
-            top: 40,
-            left: 16,
-            right: 16,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Icon(
-                      Icons.directions_bus_filled,
-                      color: Colors.black,
-                      size: 28,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      "Bus No. 990032J",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    // Phone Icon
-                    GestureDetector(
-                      onTap: () {
-                        // Dummy phone call
-                        showDialog(
-                          context: context,
-                          builder: (ctx) => AlertDialog(
-                            title: Text("Call Driver"),
-                            content: Text("Calling +91 9876543210..."),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(ctx);
-                                },
-                                child: Text("OK"),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                      child: Icon(
-                        Icons.phone,
-                        color: Colors.black,
+            top: 25,
+            left: 0,
+            right: 0,
+            height: 70,
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+              decoration: BoxDecoration(
+                color: Colors.deepPurple, // Violet background
+                borderRadius: BorderRadius.circular(0), // Rounded corners
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.directions_bus_filled,
+                        color: Colors.white, // White icon for contrast
                         size: 28,
                       ),
-                    ),
-                    const SizedBox(width: 16),
+                      const SizedBox(width: 8),
+                      const Text(
+                        "Bus No. 990032J",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white, // White text for better visibility
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      // Phone Icon
+                      GestureDetector(
+                        onTap: () {
+                          // Dummy phone call
+                          showDialog(
+                            context: context,
+                            builder: (ctx) => AlertDialog(
+                              title: const Text("Call Driver"),
+                              content: const Text("Calling +91 9876543210..."),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(ctx);
+                                  },
+                                  child: const Text("OK"),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        child: const Icon(
+                          Icons.phone,
+                          color: Colors.white, // White icon for contrast
+                          size: 28,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
 
-                    // Message Icon
-                    GestureDetector(
-                      onTap: () {
-                        // Dummy message functionality
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Messaging feature coming soon!")),
-                        );
-                      },
-                      child: Icon(
-                        Icons.message,
-                        color: Colors.black,
-                        size: 28,
+                      // Message Icon
+                      GestureDetector(
+                        onTap: () {
+                          // Dummy message functionality
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("Messaging feature coming soon!")),
+                          );
+                        },
+                        child: const Icon(
+                          Icons.message,
+                          color: Colors.white, // White icon for contrast
+                          size: 28,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
+
 
           // Bottom Dark Blue Card
           Positioned(

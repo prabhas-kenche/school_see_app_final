@@ -7,6 +7,7 @@ import 'fee_status.dart';
 import 'busTrackingScreen.dart';
 import 'resul_tpage.dart';
 import 'studentdetails_page.dart';
+import 'time_table.dart';
 
 class Navigation extends StatefulWidget {
   final Widget initialScreen;
@@ -40,7 +41,7 @@ class _NavigationState extends State<Navigation> {
     if (_currentScreen is DashboardScreen) {
       return Color(0xFFF5F7FB);
     } else if (_currentScreen is AttendencePage) {
-      return Colors.blue;
+      return Color.fromARGB(255, 242, 178, 30);
     } else if (_currentScreen is EducationPage) {
       return Color(0xFFF5F7FB);
     } else if (_currentScreen is FeeStatusPage) {
@@ -49,6 +50,8 @@ class _NavigationState extends State<Navigation> {
       return Colors.deepPurple;
     } else if (_currentScreen is ResultsPage) {
       return Colors.white;
+    }else if (_currentScreen is TimeTableScreen) {
+      return Colors.black;
     } else {
       return Color(0xFFF5F7FB);
     }

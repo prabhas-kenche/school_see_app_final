@@ -35,10 +35,7 @@ class _AttendanceDashboardState extends State<AttendanceDashboard> {
       appBar: AppBar(
         title: const Align(
           alignment: Alignment.centerLeft,
-          child: Text(
-            "𝓼𝓽𝓾𝓭𝓮𝓷𝓽",
-            style: TextStyle(fontSize: 18),
-          ),
+
         ),
         backgroundColor: const Color.fromARGB(255, 242, 178, 30),
         elevation: 0,
@@ -50,15 +47,7 @@ class _AttendanceDashboardState extends State<AttendanceDashboard> {
               shape: BoxShape.circle,
             ),
             margin: const EdgeInsets.only(right: 8),
-            child: IconButton(
-              icon: const Icon(Icons.notifications, color: Colors.black),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => StudentdetailsPage()),
-                );
-              },
-            ),
+
           ),
         ],
       ),
