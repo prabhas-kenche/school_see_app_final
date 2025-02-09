@@ -78,7 +78,7 @@ class TimeTableScreen extends StatelessWidget {
               itemCount: lessons.length,
               itemBuilder: (context, index) {
                 final lesson = lessons[index];
-                return _lessonCard(lesson["index"], lesson["title"], lesson["duration"], lesson["isLocked"]);
+                return _lessonCard(lesson["time"], lesson["title"], lesson["duration"], lesson["isLocked"]);
               },
             ),
           ),
@@ -111,7 +111,7 @@ class TimeTableScreen extends StatelessWidget {
     );
   }
 
-  Widget _lessonCard(int index, String title, String duration, bool isLocked) {
+  Widget _lessonCard(String time, String title, String duration, bool isLocked) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       padding: EdgeInsets.all(12),
@@ -154,7 +154,7 @@ class TimeTableScreen extends StatelessWidget {
           ),
           // Index
           Text(
-            index.toString(),
+            time,
             style: TextStyle(color: Colors.white54, fontSize: 16),
           ),
         ],
@@ -165,13 +165,20 @@ class TimeTableScreen extends StatelessWidget {
 
 // Lesson Data
 final List<Map<String, dynamic>> lessons = [
-  {"index": 1, "title": "Introduction", "duration": "3:45", "isLocked": false},
-  {"index": 2, "title": "AI Tools Overview", "duration": "38:17", "isLocked": true},
-  {"index": 3, "title": "AI-Driven UI Design", "duration": "24:53", "isLocked": true},
-  {"index": 4, "title": "Smart Home App Design", "duration": "15:48", "isLocked": true},
-  {"index": 5, "title": "AI Image to User Interface", "duration": "23:45", "isLocked": true},
-  {"index": 6, "title": "Buttons and Effects", "duration": "8:33", "isLocked": true},
+  {"time": "7 AM to 9 AM", "title": "Introduction", "duration": "2:00", "isLocked": false},
+  {"time": "9 AM to 10 AM", "title": "AI Tools Overview", "duration": "1:00", "isLocked": true},
+  {"time": "10 AM to 11 AM", "title": "AI-Driven UI Design", "duration": "1:00", "isLocked": true},
+  {"time": "11 AM to 12 PM", "title": "Smart Home App Design", "duration": "1:00", "isLocked": true},
+  {"time": "12 PM to 1 PM", "title": "AI Image to User Interface", "duration": "1:00", "isLocked": true},
+  {"time": "1 PM to 2 PM", "title": "Buttons and Effects", "duration": "1:00", "isLocked": true},
+  {"time": "2 PM to 3 PM", "title": "Lunch", "duration": "1:00", "isLocked": true},
+  {"time": "3 PM to 5 PM", "title": "React JS", "duration": "2:00", "isLocked": true},
+  {"time": "5 PM to 6 PM", "title": "Node JS", "duration": "1:00", "isLocked": true},
+  {"time": "6 PM to 8 PM", "title": "AI and its Features", "duration": "2:00", "isLocked": true},
+  {"time": "8 PM to 10 PM", "title": "Project Work", "duration": "2:00", "isLocked": true},
+  {"time": "10 PM to 6 AM", "title": "Sleep", "duration": "8:00", "isLocked": true},
 ];
+
 
 void main() {
   runApp(MaterialApp(

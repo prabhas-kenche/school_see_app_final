@@ -114,8 +114,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     autoPlayInterval: const Duration(seconds: 2),
                     autoPlayAnimationDuration: const Duration(milliseconds: 800),
                     autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-                    viewportFraction: 0.9,
+                    enlargeCenterPage: false,
+                    viewportFraction: 1.0,
                     onPageChanged: (index, reason) {
                       setState(() {
                         _currentIndex = index;
