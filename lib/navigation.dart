@@ -9,6 +9,7 @@ import 'resul_tpage.dart';
 import 'studentdetails_page.dart';
 import 'notifications.dart'; // Import the NotificationsPage
 import 'assignments.dart';
+import 'time_table.dart';
 
 class Navigation extends StatefulWidget {
   final Widget initialScreen;
@@ -51,6 +52,8 @@ class NavigationState extends State<Navigation> {
       return Colors.white;
     } else if (currentScreen is NotificationsPage) { // Changed here
       return const Color(0xFF00C853);
+    } else if (currentScreen is TimeTableScreen){
+      return Colors.green;
     } else {
       return const Color(0xFFF5F7FB);
     }

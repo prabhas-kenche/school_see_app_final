@@ -4,7 +4,7 @@ class TimeTableScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, // Dark background for contrast
+      backgroundColor: Colors.green, // Dark background for contrast
       body: Column(
         children: [
           // Top Section (Profile & Stats)
@@ -116,7 +116,7 @@ class TimeTableScreen extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.grey[900],
+        color: Colors.white,
         borderRadius: BorderRadius.circular(15),
       ),
       child: Row(
@@ -142,12 +142,12 @@ class TimeTableScreen extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
+                  style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
                 ),
                 SizedBox(height: 5),
                 Text(
                   duration,
-                  style: TextStyle(color: Colors.white54, fontSize: 12),
+                  style: TextStyle(color: Colors.black, fontSize: 12),
                 ),
               ],
             ),
@@ -155,7 +155,7 @@ class TimeTableScreen extends StatelessWidget {
           // Index
           Text(
             time,
-            style: TextStyle(color: Colors.white54, fontSize: 16),
+            style: TextStyle(color: Colors.black, fontSize: 14),
           ),
         ],
       ),
@@ -165,18 +165,18 @@ class TimeTableScreen extends StatelessWidget {
 
 // Lesson Data
 final List<Map<String, dynamic>> lessons = [
-  {"time": "7 AM to 9 AM", "title": "Introduction", "duration": "2:00", "isLocked": false},
-  {"time": "9 AM to 10 AM", "title": "AI Tools Overview", "duration": "1:00", "isLocked": true},
-  {"time": "10 AM to 11 AM", "title": "AI-Driven UI Design", "duration": "1:00", "isLocked": true},
-  {"time": "11 AM to 12 PM", "title": "Smart Home App Design", "duration": "1:00", "isLocked": true},
-  {"time": "12 PM to 1 PM", "title": "AI Image to User Interface", "duration": "1:00", "isLocked": true},
-  {"time": "1 PM to 2 PM", "title": "Buttons and Effects", "duration": "1:00", "isLocked": true},
-  {"time": "2 PM to 3 PM", "title": "Lunch", "duration": "1:00", "isLocked": true},
-  {"time": "3 PM to 5 PM", "title": "React JS", "duration": "2:00", "isLocked": true},
-  {"time": "5 PM to 6 PM", "title": "Node JS", "duration": "1:00", "isLocked": true},
-  {"time": "6 PM to 8 PM", "title": "AI and its Features", "duration": "2:00", "isLocked": true},
-  {"time": "8 PM to 10 PM", "title": "Project Work", "duration": "2:00", "isLocked": true},
-  {"time": "10 PM to 6 AM", "title": "Sleep", "duration": "8:00", "isLocked": true},
+  {"time": "7: 00 AM to 9: 00 AM", "title": "Introduction", "duration": "2:00", "isLocked": false},
+  {"time": "9: 00 AM to 10: 00 AM", "title": "AI Tools Overview", "duration": "1:00", "isLocked": true},
+  {"time": "10: 00 AM to 11: 00 AM", "title": "AI-Driven UI Design", "duration": "1:00", "isLocked": true},
+  {"time": "11: 00 AM to 12: 00 PM", "title": "Smart Home App Design", "duration": "1:00", "isLocked": true},
+  {"time": "12: 00 PM to 1: 00 PM", "title": "AI Image to User Interface", "duration": "1:00", "isLocked": true},
+  {"time": "1: 00 PM to 2: 00 PM", "title": "Buttons and Effects", "duration": "1:00", "isLocked": true},
+  {"time": "2: 00 PM to 3: 00 PM", "title": "Lunch", "duration": "1:00", "isLocked": true},
+  {"time": "3: 00 PM to 5: 00 PM", "title": "React JS", "duration": "2:00", "isLocked": true},
+  {"time": "5: 00 PM to 6: 00 PM", "title": "Node JS", "duration": "1:00", "isLocked": true},
+  {"time": "6: 00 PM to 8: 00 PM", "title": "AI and its Features", "duration": "2:00", "isLocked": true},
+  {"time": "8:00 PM to 10: 00 PM", "title": "Project Work", "duration": "2:00", "isLocked": true},
+  {"time": "10: 00 PM to 6: 00 AM", "title": "Sleep", "duration": "8:00", "isLocked": true},
 ];
 
 
