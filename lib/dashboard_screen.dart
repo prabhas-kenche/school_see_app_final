@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:school_see/myLibrary.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'attendence_page.dart';
 import 'digitalclasses.dart';
@@ -152,7 +153,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       _DashboardCard(title: 'Time Table', icon: Icons.schedule, onTap: () => _navigateTo(TimeTableScreen())),
                       _DashboardCard(title: 'Results', icon: Icons.bar_chart, onTap: () => _navigateTo(ResultsPage())),
                       _DashboardCard(title: 'QA Game', icon: Icons.videogame_asset, onTap: () => _navigateTo(QAExamScreen())),
-                      _DashboardCard(title: 'My Library', icon: Icons.local_library_outlined, onTap: () => _navigateTo(Placeholder())),
+                      _DashboardCard(title: 'My Library', icon: Icons.local_library_outlined, onTap: () => _navigateTo(Mylibrary())),
                     ],
                   ),
                 ),
