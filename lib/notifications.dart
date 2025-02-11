@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'navigation.dart'; // Import Navigation to access NavigationState
+import 'navigation.dart';
+import 'all_notifications.dart';
 
 class NotificationsPage extends StatelessWidget {
   const NotificationsPage({super.key});
@@ -73,6 +74,33 @@ class NotificationsPage extends StatelessWidget {
                 style: TextStyle(fontSize: 18, color: Colors.black),
               ),
             ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.yellow,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+              ),
+              onPressed: () {
+                final navigationState = context.findAncestorStateOfType<NavigationState>();
+                if (navigationState != null) {
+                  navigationState.setState(() {
+                    navigationState.selectedIndex = 1;
+                  });
+                }
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AllNotifications()),
+                );
+              },
+              child: const Text(
+                'All Notifications',
+                style: TextStyle(fontSize: 18, color: Colors.black),
+              ),
+            ),
+
           ],
         ),
       ),

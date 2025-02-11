@@ -56,7 +56,7 @@ class ResultsPage extends StatelessWidget {
 
     return Card(
       margin: EdgeInsets.only(bottom: 16),
-      elevation: 4,
+      elevation: 0, // Removed shadow
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -105,11 +105,26 @@ class ResultsPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 10),
-            Center(
-              child: Text(
-                'Percentage: ${percentage.toStringAsFixed(2)}% | Grade: $grade',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.blue),
+            // Box for Percentage and Grade
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black),
+                borderRadius: BorderRadius.circular(0),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Percentage: ${percentage.toStringAsFixed(2)}%',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black),
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    'Grade: $grade',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black),
+                  ),
+                ],
               ),
             ),
           ],

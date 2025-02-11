@@ -41,6 +41,8 @@ dependencies:
   latlong2: 0.9.1
   smooth_page_indicator: ^1.1.0 # Use the latest version
   flutter_svg: ^2.0.0
+  chewie: ^1.0.0 # Check for the latest version
+  video_player: ^2.2.10 # Ensure this is also included
 
 
 dev_dependencies:
@@ -97,6 +99,7 @@ flutter:
     - assets/images/otp-security.png
     - assets/images/forgot_password.png
     - assets/images/notifications.svg
+    - assets/videos/bagheera.mp4
   
 
 

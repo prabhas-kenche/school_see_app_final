@@ -63,7 +63,7 @@ class TimeTableScreen extends StatelessWidget {
                   runSpacing: 10,
                   children: [
                     _statusCard("13", "Active", Colors.blue),
-                    _statusCard("15", "Pending", Colors.grey),
+                    _statusCard("15", "Pending", Colors.black),
                     _statusCard("21", "Completed", Colors.black),
                   ],
                 ),

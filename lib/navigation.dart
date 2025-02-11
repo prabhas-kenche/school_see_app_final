@@ -1,4 +1,3 @@
-// navigation.dart
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'dashboard_screen.dart';
@@ -10,6 +9,7 @@ import 'studentdetails_page.dart';
 import 'notifications.dart'; // Import the NotificationsPage
 import 'assignments.dart';
 import 'time_table.dart';
+import 'all_notifications.dart';
 
 class Navigation extends StatefulWidget {
   final Widget initialScreen;
