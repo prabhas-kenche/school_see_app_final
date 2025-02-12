@@ -42,7 +42,9 @@ dependencies:
   smooth_page_indicator: ^1.1.0 # Use the latest version
   flutter_svg: ^2.0.0
   chewie: ^1.0.0 # Check for the latest version
-  video_player: ^2.2.10 # Ensure this is also included
+  media_kit: ^1.1.11
+  media_kit_video: ^1.2.5
+  media_kit_libs_video: ^1.0.5
 
 
 dev_dependencies:

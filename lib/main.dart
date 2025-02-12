@@ -4,8 +4,11 @@ import 'registrationpage.dart';
 import 'reset-password.dart';
 import 'navigation.dart';
 import 'dart:ui';
+import 'package:media_kit/media_kit.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  MediaKit.ensureInitialized();
   runApp(const SchoolSeeApp());
 }
 

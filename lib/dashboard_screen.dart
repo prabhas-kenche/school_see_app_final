@@ -11,7 +11,8 @@ import 'navigation.dart';
 import 'qa-game.dart';
 import 'smart-calender.dart';
 import 'time_table.dart';
-import 'dart:io'; // Added for app exit functionality
+import 'dart:io';
+import 'myLibrary.dart';
 
 void main() {
   runApp(const MyApp());
