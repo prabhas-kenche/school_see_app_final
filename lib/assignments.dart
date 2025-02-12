@@ -31,13 +31,15 @@ class AssignmentPage extends StatelessWidget {
       title: 'English Essay: My Favorite Book',
       dueDate: DateTime(2025, 2, 15),
       subject: 'English',
-      description: 'Write a 500-word essay about your favorite book and why you enjoy it.',
+      description:
+          'Write a 500-word essay about your favorite book and why you enjoy it.',
     ),
     Assignment(
       title: 'Science Project: Solar System Model',
       dueDate: DateTime(2025, 2, 19),
       subject: 'Science',
-      description: 'Create a model of the solar system using any materials you like.',
+      description:
+          'Create a model of the solar system using any materials you like.',
     ),
   ];
 
@@ -45,7 +47,8 @@ class AssignmentPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Assignments', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text('My Assignments',
+            style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.deepPurple[300],
         centerTitle: true,
       ),
@@ -98,7 +101,8 @@ class AssignmentCard extends StatelessWidget {
               children: [
                 Icon(Icons.book, size: 16, color: Colors.grey[600]),
                 SizedBox(width: 4),
-                Text(assignment.subject, style: TextStyle(color: Colors.grey[600])),
+                Text(assignment.subject,
+                    style: TextStyle(color: Colors.grey[600])),
               ],
             ),
             SizedBox(height: 8),
@@ -129,7 +133,8 @@ class AssignmentCard extends StatelessWidget {
                     foregroundColor: Colors.white,
                     backgroundColor: Colors.deepPurple[400],
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
                   ),
                   child: Text('View Details'),
                 ),

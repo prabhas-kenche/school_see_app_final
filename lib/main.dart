@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:school_see/dashboard_screen.dart';
 import 'registrationpage.dart';
@@ -138,8 +139,10 @@ class _LoginFormState extends State<_LoginForm> {
           key: _formKey,
           child: Column(
             children: [
-              _buildTextField('Enroll ID', enrollIdController, 'Enter Your Enroll Id'),
-              _buildPasswordField('Password', passwordController, 'Enter Your Password')
+              _buildTextField(
+                  'Enroll ID', enrollIdController, 'Enter Your Enroll Id'),
+              _buildPasswordField(
+                  'Password', passwordController, 'Enter Your Password')
             ],
           ),
         ),
@@ -150,7 +153,8 @@ class _LoginFormState extends State<_LoginForm> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => Navigation(initialScreen: const DashboardScreen()),
+                  builder: (_) =>
+                      Navigation(initialScreen: const DashboardScreen()),
                 ),
               );
             } else {
@@ -209,7 +213,8 @@ class _LoginFormState extends State<_LoginForm> {
     );
   }
 
-  Widget _buildPasswordField(String label, TextEditingController controller, String hint) {
+  Widget _buildPasswordField(
+      String label, TextEditingController controller, String hint) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
@@ -217,17 +222,22 @@ class _LoginFormState extends State<_LoginForm> {
         children: [
           Text(
             label,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black87),
+            style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.black87),
           ),
           const SizedBox(height: 8),
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), // Frosted glass effect
+              filter: ImageFilter.blur(
+                  sigmaX: 10, sigmaY: 10), // Frosted glass effect
               child: Container(
                 decoration: BoxDecoration(
                   border: Border(bottom: BorderSide(color: Colors.grey)),
-                  color: const Color.fromARGB(255, 189, 189, 189).withOpacity(0.1),
+                  color:
+                      const Color.fromARGB(255, 189, 189, 189).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     BoxShadow(
@@ -249,7 +259,9 @@ class _LoginFormState extends State<_LoginForm> {
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
                       icon: Icon(
-                        _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                        _isPasswordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
                         color: Colors.red,
                       ),
                       onPressed: () {
@@ -259,10 +271,12 @@ class _LoginFormState extends State<_LoginForm> {
                       },
                     ),
                     hintText: hint,
-                    hintStyle: TextStyle(color: Colors.black45.withOpacity(0.6)),
+                    hintStyle:
+                        TextStyle(color: Colors.black45.withOpacity(0.6)),
                     filled: true,
                     fillColor: Colors.transparent,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 14),
                     border: InputBorder.none,
                   ),
                   validator: (value) {
@@ -279,9 +293,7 @@ class _LoginFormState extends State<_LoginForm> {
       ),
     );
   }
-
 }
-
 
 Widget _buildTextField(
     String label, TextEditingController controller, String hint) {

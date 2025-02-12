@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:school_see/examTimeTableScreen.dart';
 import 'package:school_see/myLibrary.dart';
+import 'package:school_see/onlineExams.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'attendence_page.dart';
 import 'digitalclasses.dart';
@@ -41,7 +43,8 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  final CarouselSliderController _carouselController = CarouselSliderController();
+  final CarouselSliderController _carouselController =
+      CarouselSliderController();
   int _currentIndex = 0;
 
   final List<String> carouselImages = [
@@ -87,7 +90,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                     const CircleAvatar(
                       radius: 30,
-                      backgroundImage: AssetImage('assets/images/school_see_logo.png'),
+                      backgroundImage:
+                          AssetImage('assets/images/school_see_logo.png'),
                     ),
                   ],
                 ),
@@ -114,7 +118,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     height: 150.0,
                     autoPlay: true,
                     autoPlayInterval: const Duration(seconds: 2),
-                    autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                    autoPlayAnimationDuration:
+                        const Duration(milliseconds: 800),
                     autoPlayCurve: Curves.fastOutSlowIn,
                     enlargeCenterPage: false,
                     viewportFraction: 1.0,
@@ -146,15 +151,51 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     mainAxisSpacing: 16,
                     childAspectRatio: 0.9,
                     children: [
-                      _DashboardCard(title: 'Attendance', icon: Icons.person_rounded, onTap: () => _navigateTo(const AttendencePage())),
-                      _DashboardCard(title: 'Digital Classes', icon: Icons.cast_for_education, onTap: () => _navigateTo(const Digitalclasses())),
-                      _DashboardCard(title: 'Fee Status', icon: Icons.payment, onTap: () => _navigateTo(FeeStatusPage())),
-                      _DashboardCard(title: 'Bus Tracking', icon: Icons.directions_bus, onTap: () => _navigateTo(BusTrackingScreen())),
-                      _DashboardCard(title: 'School Calendar', icon: Icons.calendar_month, onTap: () => _navigateTo(SmartCalenderPage())),
-                      _DashboardCard(title: 'Time Table', icon: Icons.schedule, onTap: () => _navigateTo(TimeTableScreen())),
-                      _DashboardCard(title: 'Results', icon: Icons.bar_chart, onTap: () => _navigateTo(ResultsPage())),
-                      _DashboardCard(title: 'QA Game', icon: Icons.videogame_asset, onTap: () => _navigateTo(QAExamScreen())),
-                      _DashboardCard(title: 'My Library', icon: Icons.local_library_outlined, onTap: () => _navigateTo(Mylibrary())),
+                      _DashboardCard(
+                          title: 'Attendance',
+                          icon: Icons.person_rounded,
+                          onTap: () => _navigateTo(const AttendencePage())),
+                      _DashboardCard(
+                          title: 'Digital Classes',
+                          icon: Icons.cast_for_education,
+                          onTap: () => _navigateTo(const Digitalclasses())),
+                      _DashboardCard(
+                          title: 'Fee Status',
+                          icon: Icons.payment,
+                          onTap: () => _navigateTo(FeeStatusPage())),
+                      _DashboardCard(
+                          title: 'Bus Tracking',
+                          icon: Icons.directions_bus,
+                          onTap: () => _navigateTo(BusTrackingScreen())),
+                      _DashboardCard(
+                          title: 'School Calendar',
+                          icon: Icons.calendar_month,
+                          onTap: () => _navigateTo(SmartCalenderPage())),
+                      _DashboardCard(
+                          title: 'Time Table',
+                          icon: Icons.schedule,
+                          onTap: () => _navigateTo(TimeTableScreen())),
+                      _DashboardCard(
+                          title: 'Results',
+                          icon: Icons.bar_chart,
+                          onTap: () => _navigateTo(ResultsPage())),
+                      _DashboardCard(
+                          title: 'QA Game',
+                          icon: Icons.videogame_asset,
+                          onTap: () => _navigateTo(QAExamScreen())),
+                      _DashboardCard(
+                          title: 'My Library',
+                          icon: Icons.local_library_outlined,
+                          onTap: () => _navigateTo(Mylibrary())),
+                      _DashboardCard(
+                          title: 'Online Exams',
+                          icon: Icons.book,
+                          onTap: () => _navigateTo(const Onlineexams())),
+                      _DashboardCard(
+                          title: 'Exam TimeTable',
+                          icon: Icons.timelapse,
+                          onTap: () =>
+                              _navigateTo(const Examtimetablescreen())),
                     ],
                   ),
                 ),
@@ -169,7 +210,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void _navigateTo(Widget screen) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Navigation(initialScreen: screen)),
+      MaterialPageRoute(
+          builder: (context) => Navigation(initialScreen: screen)),
     );
   }
 
@@ -187,25 +229,29 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ),
         content: const Padding(
-          padding: EdgeInsets.only(top: 0.0), // Reduce space between title and content
+          padding: EdgeInsets.only(
+              top: 0.0), // Reduce space between title and content
           child: Text(
             'Are you sure ?',
             textAlign: TextAlign.center,
           ),
         ),
         actionsAlignment: MainAxisAlignment.center, // Center buttons closer
-        actionsPadding: const EdgeInsets.symmetric(vertical: 10.0), // Adjust padding between buttons
+        actionsPadding: const EdgeInsets.symmetric(
+            vertical: 10.0), // Adjust padding between buttons
         actions: [
           TextButton(
             style: TextButton.styleFrom(
-                backgroundColor: const Color(0xFF2C672D), foregroundColor: Colors.white),
+                backgroundColor: const Color(0xFF2C672D),
+                foregroundColor: Colors.white),
             onPressed: () => exit(0),
             child: const Text('Yes'),
           ),
           SizedBox(width: 50), // Add gap between buttons
           TextButton(
             style: TextButton.styleFrom(
-                backgroundColor: const Color(0xFFAF362D), foregroundColor: Colors.white),
+                backgroundColor: const Color(0xFFAF362D),
+                foregroundColor: Colors.white),
             onPressed: () => Navigator.of(context).pop(false),
             child: const Text('No'),
           ),
@@ -214,9 +260,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
     return shouldExit ?? false;
   }
-
-
-
 }
 
 class _DashboardCard extends StatelessWidget {
