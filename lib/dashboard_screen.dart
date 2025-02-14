@@ -15,6 +15,7 @@ import 'smart-calender.dart';
 import 'time_table.dart';
 import 'dart:io';
 import 'myLibrary.dart';
+import 'examTimeTableScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -194,8 +195,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       _DashboardCard(
                           title: 'Exam TimeTable',
                           icon: Icons.timelapse,
-                          onTap: () =>
-                              _navigateTo(const Examtimetablescreen())),
+                          onTap: () => _navigateTo(Examtimetablescreen())),
+                      _DashboardCard(
+                          title: 'GatePss Request',
+                          icon: Icons.receipt_long,
+                          onTap: () => _navigateTo(Placeholder())),
                     ],
                   ),
                 ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:media_kit/media_kit.dart';
-import 'package:media_kit_video/media_kit_video.dart';
+import 'package:video_player/video_player.dart';
 
 void main() {
   runApp(const SubjectclassesPage());
@@ -28,11 +27,9 @@ class CourseListPage extends StatefulWidget {
 class _CourseListPageState extends State<CourseListPage> {
   final ScrollController _scrollController = ScrollController();
   String? selectedTopicTitle;
-  Player? _player;
-  VideoController? _videoController;
+  VideoPlayerController? _controller;
   bool isPlaying = false;
   bool showControls = false;
-  Duration currentPosition = Duration.zero;
 
   final List<Map<String, String>> mathTopics = [
     {'title': 'Algebra Basics', 'image': 'assets/images/algebra.png', 'video': 'assets/videos/bagheera.mp4'},
@@ -44,44 +41,34 @@ class _CourseListPageState extends State<CourseListPage> {
 
   @override
   void dispose() {
-    _player?.dispose();
+    _controller?.dispose();
     _scrollController.dispose();
     super.dispose();
   }
 
   void _playVideo(String videoPath) {
-    _player?.dispose();
-    _player = Player();
-    _videoController = VideoController(_player!);
-    _player!.open(Media(videoPath));
-    setState(() {
-      isPlaying = true;
-      showControls = true;
-    });
-    _hideControlsAfterDelay();
+    _controller?.dispose();
+    _controller = VideoPlayerController.asset('assets/videos/bagheera.mp4')
+      ..initialize().then((_) {
+        setState(() {
+          isPlaying = true;
+          showControls = true;
+          _controller!.play();
+        });
+      });
   }
+
 
   void _togglePlayPause() {
-    if (_player == null) return;
+    if (_controller == null || !_controller!.value.isInitialized) return;
     setState(() {
-      if (isPlaying) {
-        _player!.pause();
+      if (_controller!.value.isPlaying) {
+        _controller!.pause();
       } else {
-        _player!.play();
+        _controller!.play();
       }
-      isPlaying = !isPlaying;
+      isPlaying = _controller!.value.isPlaying;
       showControls = true;
-    });
-    _hideControlsAfterDelay();
-  }
-
-  void _hideControlsAfterDelay() {
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) {
-        setState(() {
-          showControls = false;
-        });
-      }
     });
   }
 
@@ -99,10 +86,15 @@ class _CourseListPageState extends State<CourseListPage> {
             width: double.infinity,
             child: selectedTopicTitle == null
                 ? Image.asset('assets/images/placeholder.png', fit: BoxFit.cover)
-                : _videoController != null
-                ? Video(controller: _videoController!)
+                : _controller != null && _controller!.value.isInitialized
+                ? AspectRatio(
+              aspectRatio: _controller!.value.aspectRatio,
+              child: VideoPlayer(_controller!),
+            )
                 : const Center(child: CircularProgressIndicator()),
           ),
+          if (_controller != null && _controller!.value.isInitialized)
+            VideoProgressIndicator(_controller!, allowScrubbing: true),
           Expanded(
             child: ListView.builder(
               controller: _scrollController,
