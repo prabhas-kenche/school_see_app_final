@@ -52,7 +52,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding:
-                        const EdgeInsets.symmetric(vertical: 7, horizontal: 20),
+                        const EdgeInsets.symmetric(vertical: 9, horizontal: 22),
                     child: GestureDetector(
                       onTap: () {
                         setState(() {
@@ -61,7 +61,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       },
                       child: AnimatedContainer(
                         duration: Duration(milliseconds: 300),
-                        padding: EdgeInsets.all(16),
+                        padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           color: Colors.grey[800],
@@ -77,6 +77,14 @@ class _QuizScreenState extends State<QuizScreen> {
                         child: Row(
                           children: [
                             Radio<int>(
+                              fillColor: WidgetStateProperty.resolveWith<Color>(
+                                  (states) {
+                                if (states.contains(WidgetState.selected)) {
+                                  return Colors.greenAccent;
+                                }
+                                return Colors
+                                    .white70; // Non-selected radio button color
+                              }),
                               value: index,
                               groupValue: selectedOptionIndex,
                               onChanged: (value) {
