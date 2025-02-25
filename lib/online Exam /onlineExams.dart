@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:school_see/online%20Exam%20/OnlineTestScreen.dart';
 
 class Onlineexams extends StatelessWidget {
   const Onlineexams({super.key});
@@ -110,7 +111,41 @@ class Onlineexams extends StatelessWidget {
                   StartButton(),
                 ],
               ),
-            )
+            ),
+
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(13),
+                  color: Colors.grey.shade100,
+                ),
+                height: 100,
+                width: 320,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15, left: 15.0),
+                      child: Text(
+                        "Start & Challenge ",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15.0),
+                      child: Text(
+                        "Buckle up and secure Top ",
+                        style: TextStyle(
+                            color: Colors.grey.shade600,
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ))
           ],
         ),
       ),
@@ -182,7 +217,10 @@ class StartButton extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => QuizScreen()));
+          },
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: 15),
             backgroundColor: Colors.blue.shade800,
