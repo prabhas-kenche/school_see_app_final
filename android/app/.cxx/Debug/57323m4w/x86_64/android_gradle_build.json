@@ -1,0 +1,28 @@
+{
+  "buildFiles": [
+    "/Users/vish/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/vish/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/vish/Desktop/schoolsee-app/school_see_app_final/android/app/.cxx/Debug/57323m4w/x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/vish/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/vish/Desktop/schoolsee-app/school_see_app_final/android/app/.cxx/Debug/57323m4w/x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {},
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "/Users/vish/Library/Android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang.lld",
+      "cppCompilerExecutable": "/Users/vish/Library/Android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++.lld"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": []
+}

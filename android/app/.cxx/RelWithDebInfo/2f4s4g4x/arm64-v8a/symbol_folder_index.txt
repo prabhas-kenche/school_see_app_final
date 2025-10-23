@@ -1,0 +1,1 @@
+/Users/vish/Desktop/schoolsee-app/school_see_app_final/build/app/intermediates/cxx/RelWithDebInfo/2f4s4g4x/obj/arm64-v8a

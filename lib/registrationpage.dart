@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'main.dart';
 
 void main() {
-  runApp(RegistrationPage());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: RegistrationPage(),
+      home: const RegistrationPage(),
     );
   }
 }
@@ -28,23 +30,62 @@ class RegistrationPage extends StatefulWidget {
   _RegistrationPageState createState() => _RegistrationPageState();
 }
 
-bool _obscureText = true;
-const primaryColor = Color(0xFFE0E0E0);
-
 class _RegistrationPageState extends State<RegistrationPage> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _studentFirstNameController =
-  TextEditingController();
-  final TextEditingController _studentLastNameController =
-  TextEditingController();
+  final TextEditingController _studentFirstNameController = TextEditingController();
+  final TextEditingController _studentLastNameController = TextEditingController();
   final TextEditingController _classController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
   final TextEditingController _fatherNameController = TextEditingController();
   final TextEditingController _motherNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _enrollIDController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-  TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _mobileNumberController = TextEditingController();
+  bool _obscureText = true;
+  bool _obscureConfirmText = true;
+
+  Future<void> _registerUser() async {
+    if (!_formKey.currentState!.validate()) return;
+    final url = Uri.parse('http://192.168.202.116:3000/api/register');
+    try {
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'studentFirstName': _studentFirstNameController.text.trim(),
+          'studentLastName': _studentLastNameController.text.trim(),
+          'class': _classController.text.trim(),
+          'dob': _dobController.text.trim(),
+          'fatherName': _fatherNameController.text.trim(),
+          'motherName': _motherNameController.text.trim(),
+          'email': _emailController.text.trim(),
+          'enrollId': _enrollIDController.text.trim(),
+          'mobileNumber': _mobileNumberController.text.trim(),
+          'password': _passwordController.text.trim(),
+        }),
+      );
+      if (response.statusCode == 201) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Registration Successful')),
+        );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const SchoolSeeApp()),
+        );
+      } else {
+        final responseBody = jsonDecode(response.body);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: ${responseBody['error']}')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error connecting to server: $e')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +94,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       appBar: AppBar(
         title: const Text(
           'Parent Registration',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.blueGrey,
       ),
@@ -95,33 +134,62 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  _buildTextField('Student First Name',
-                      _studentFirstNameController, 'Enter your first name'),
-                  _buildTextField('Student Last Name',
-                      _studentLastNameController, 'Enter your last name'),
+                  _buildTextField(
+                      'Student First Name',
+                      _studentFirstNameController,
+                      'Enter your first name'),
+                  _buildTextField(
+                      'Student Last Name',
+                      _studentLastNameController,
+                      'Enter your last name'),
                   _buildTextField('Class', _classController, 'Enter class'),
                   _buildTextField(
-                      'Date of Birth', _dobController, ' (DD/MM/YYYY)'),
+                      'Date of Birth', _dobController, '(DD/MM/YYYY)'),
                   _buildTextField(
-                      'Father Name', _fatherNameController, ' Father name'),
+                      'Father Name', _fatherNameController, 'Father name'),
                   _buildTextField(
-                      'Mother Name', _motherNameController, ' Mother name'),
+                      'Mother Name', _motherNameController, 'Mother name'),
                   _buildTextField(
                       'Email ID', _emailController, 'Enter your email'),
-                  _buildPasswordField('Password', _passwordController,
-                      'Enter a secure password'),
-                  _buildPasswordField('Confirm Password',
-                      _confirmPasswordController, 'Re-enter your password'),
+                  _buildTextField(
+                      'Mobile Number', _mobileNumberController, 'Enter your mobile number'),
+                  _buildTextField('EnrollId', _enrollIDController, 'EnrollId'),
+                  _buildPasswordField(
+                      'Password',
+                      _passwordController,
+                      'Enter a secure password',
+                      _obscureText,
+                      (value) => setState(() => _obscureText = value)),
+                  const Text(
+                    "Password must be 8+ characters with a number & symbol",
+                    style: TextStyle(fontSize: 12),
+                  ),
+                  _buildPasswordField(
+                      'Confirm Password',
+                      _confirmPasswordController,
+                      'Re-enter your password',
+                      _obscureConfirmText,
+                      (value) => setState(() => _obscureConfirmText = value)),
                   const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => const SchoolSeeApp()),
+                          );
+                        },
+                        child: const Text(
+                          'Back to Login',
+                          style: TextStyle(color: Color(0xFF007AFF)),
+                        ),
+                      ),
+                    ],
+                  ),
                   ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text('Registration Successful')),
-                        );
-                      }
-                    },
+                    onPressed: _registerUser,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF97C8D6),
                       shape: RoundedRectangleBorder(
@@ -148,9 +216,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     );
   }
 
-//Styling added textfields
-  Widget _buildTextField(
-      String label, TextEditingController controller, String hint) {
+  Widget _buildTextField(String label, TextEditingController controller, String hint) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
@@ -159,52 +225,55 @@ class _RegistrationPageState extends State<RegistrationPage> {
           Text(
             label,
             style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87),
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.black87,
+            ),
           ),
           const SizedBox(height: 8),
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: BackdropFilter(
-              filter: ImageFilter.blur(
-                  sigmaX: 10, sigmaY: 10), // Frosted glass effect
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
               child: Container(
                 decoration: BoxDecoration(
                   border: Border(bottom: BorderSide(color: Colors.grey)),
-                  color:
-                  const Color.fromARGB(255, 189, 189, 189).withOpacity(0.1),
+                  color: const Color.fromARGB(255, 189, 189, 189).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.3),
                       blurRadius: 4,
-                      offset: Offset(-10, -12), // Top and left
+                      offset: Offset(-10, -12),
                     ),
-                    // White shadow on bottom-right
-                    BoxShadow(
-                      color: Colors.white.withOpacity(0.7),
+                    const BoxShadow(
+                      color: Colors.white,
                       blurRadius: 7,
-                      offset: Offset(10, 10), // Bottom and right
+                      offset: Offset(10, 10),
                     ),
                   ],
                 ),
                 child: TextFormField(
                   controller: controller,
                   style: const TextStyle(color: Colors.black87),
+                  keyboardType: label.contains('Mobile Number') ? TextInputType.phone : TextInputType.text,
                   decoration: InputDecoration(
                     hintText: hint,
-                    hintStyle:
-                    TextStyle(color: Colors.black45.withOpacity(0.6)),
+                    hintStyle: TextStyle(color: Colors.black45.withOpacity(0.6)),
                     filled: true,
                     fillColor: Colors.transparent,
-                    contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 14),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                     border: InputBorder.none,
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter $label';
+                    }
+                    if (label == 'Mobile Number' && (value.length < 10 || !RegExp(r'^[0-9]+$').hasMatch(value))) {
+                      return 'Please enter a valid 10-digit mobile number';
+                    }
+                    if (label == 'Email ID' && !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+                      return 'Please enter a valid email';
                     }
                     return null;
                   },
@@ -217,8 +286,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     );
   }
 
-  Widget _buildPasswordField(
-      String label, TextEditingController controller, String hint) {
+  Widget _buildPasswordField(String label, TextEditingController controller, String hint, bool obscureText, Function(bool) onVisibilityChanged) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
@@ -227,69 +295,65 @@ class _RegistrationPageState extends State<RegistrationPage> {
           Text(
             label,
             style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87),
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.black87,
+            ),
           ),
           const SizedBox(height: 8),
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: BackdropFilter(
-              filter: ImageFilter.blur(
-                  sigmaX: 10, sigmaY: 10), // Frosted glass effect
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
               child: Container(
                 decoration: BoxDecoration(
                   border: Border(bottom: BorderSide(color: Colors.grey)),
-                  color:
-                  const Color.fromARGB(255, 189, 189, 189).withOpacity(0.1),
+                  color: const Color.fromARGB(255, 189, 189, 189).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.3),
                       blurRadius: 4,
-                      offset: Offset(-10, -12), // Top and left
+                      offset: Offset(-10, -12),
                     ),
-                    // White shadow on bottom-right
-                    BoxShadow(
-                      color: Colors.white.withOpacity(0.7),
+                    const BoxShadow(
+                      color: Colors.white,
                       blurRadius: 7,
-                      offset: Offset(10, 10), // Bottom and right
+                      offset: Offset(10, 10),
                     ),
                   ],
                 ),
                 child: TextFormField(
                   controller: controller,
-                  obscureText: _obscureText,
+                  obscureText: obscureText,
                   style: const TextStyle(color: Colors.black87),
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            _obscureText = !_obscureText;
-                          });
-                        },
-                        icon: Icon(
-                          _obscureText
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                          color: Color.fromRGBO(229, 61, 109, 1),
-                        )),
+                      icon: Icon(
+                        obscureText ? Icons.visibility_off : Icons.visibility,
+                        color: Colors.red,
+                      ),
+                      onPressed: () => onVisibilityChanged(!obscureText),
+                    ),
                     hintText: hint,
-                    hintStyle:
-                    TextStyle(color: Colors.black45.withOpacity(0.6)),
+                    hintStyle: TextStyle(color: Colors.black45.withOpacity(0.6)),
                     filled: true,
                     fillColor: Colors.transparent,
-                    contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 14),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                     border: InputBorder.none,
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter $label';
                     }
-                    if (label == 'Confirm Password' &&
-                        value != _passwordController.text) {
+                    if (label == 'Confirm Password' && value != _passwordController.text) {
                       return 'Passwords do not match';
+                    }
+                    if (label == 'Password' && value.length < 8) {
+                      return 'Password must be at least 8 characters';
+                    }
+                    if (label == 'Password' && (!RegExp(r'[0-9]').hasMatch(value) || !RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value))) {
+                      return 'Password must contain a number and a special character';
                     }
                     return null;
                   },

@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/Users/vish/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/vish/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/vish/Desktop/schoolsee-app/school_see_app_final/android/app/.cxx/RelWithDebInfo/2f4s4g4x/x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/vish/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/vish/Desktop/schoolsee-app/school_see_app_final/android/app/.cxx/RelWithDebInfo/2f4s4g4x/x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}

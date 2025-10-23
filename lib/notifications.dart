@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'navigation.dart';
 import 'all_notifications.dart';
-
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 class NotificationsPage extends StatelessWidget {
   const NotificationsPage({super.key});
 

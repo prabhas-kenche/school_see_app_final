@@ -14,8 +14,7 @@ import 'qa-game.dart';
 import 'smart-calender.dart';
 import 'time_table.dart';
 import 'dart:io';
-import 'myLibrary.dart';
-import 'examTimeTableScreen.dart';
+import 'gate_pass_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -84,7 +83,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         ),
                         SizedBox(height: 4),
                         Text(
-                          'Where the students store their data',
+                          'Where the students can find brif',
                           style: TextStyle(color: Colors.grey, fontSize: 14),
                         ),
                       ],
@@ -155,7 +154,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       _DashboardCard(
                           title: 'Attendance',
                           icon: Icons.person_rounded,
-                          onTap: () => _navigateTo(const AttendencePage())),
+                          onTap: () => _navigateTo(const AttendanceScreen())),
                       _DashboardCard(
                           title: 'Digital Classes',
                           icon: Icons.cast_for_education,
@@ -199,7 +198,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       _DashboardCard(
                           title: 'GatePss Request',
                           icon: Icons.receipt_long,
-                          onTap: () => _navigateTo(Placeholder())),
+                          onTap: () => _navigateTo(GatePassPage())),
                     ],
                   ),
                 ),

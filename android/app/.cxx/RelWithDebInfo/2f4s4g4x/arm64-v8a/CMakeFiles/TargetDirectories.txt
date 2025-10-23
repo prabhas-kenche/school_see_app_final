@@ -1,0 +1,2 @@
+/Users/vish/Desktop/schoolsee-app/school_see_app_final/android/app/.cxx/RelWithDebInfo/2f4s4g4x/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/vish/Desktop/schoolsee-app/school_see_app_final/android/app/.cxx/RelWithDebInfo/2f4s4g4x/arm64-v8a/CMakeFiles/rebuild_cache.dir
