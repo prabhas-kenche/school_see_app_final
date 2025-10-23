@@ -36,9 +36,8 @@ class _BusTrackingScreenState extends State<BusTrackingScreen> {
           FlutterMap(
             mapController: mapController,
             options: MapOptions(
-              center: LatLng(17.385044, 78.486671), // Example location
-              zoom: 13.0,
-              interactiveFlags: InteractiveFlag.all, // Enable all gestures (including pinch-to-zoom)
+              initialCenter: LatLng(17.385044, 78.486671), // Example location
+              initialZoom: 13.0,
             ),
             children: [
               if (selectedLayer == "street")
@@ -54,7 +53,7 @@ class _BusTrackingScreenState extends State<BusTrackingScreen> {
               MarkerLayer(
                 markers: busStops.map((stop) => Marker(
                       point: stop["location"],
-                      builder: (ctx) => Column(
+                      child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(

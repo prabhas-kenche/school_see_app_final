@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:school_see/examTimeTableScreen.dart';
-import 'package:school_see/myLibrary.dart';
-import 'package:school_see/onlineExams.dart';
+import 'package:school_see_app/examTimeTableScreen.dart';
+import 'package:school_see_app/myLibrary.dart';
+import 'package:school_see_app/onlineExams.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'attendence_page.dart';
 import 'digitalclasses.dart';

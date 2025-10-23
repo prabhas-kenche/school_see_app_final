@@ -50,9 +50,9 @@ class NavigationState extends State<Navigation> {
     super.initState();
     if (widget.initialScreen is SubjectClassesPage) {
       // Create SubjectClassesPage with fullscreen callback
-      currentScreen = SubjectClassesPage(
-        onFullScreenChanged: setFullScreen,
-      );
+      // currentScreen = SubjectClassesPage(
+      //   onFullScreenChanged: setFullScreen,
+      // );
     } else {
       currentScreen = widget.initialScreen;
     }
@@ -228,9 +228,9 @@ class NavigationState extends State<Navigation> {
                       break;
                     default:
                       if (widget.initialScreen is SubjectClassesPage) {
-                        currentScreen = SubjectClassesPage(
-                          onFullScreenChanged: setFullScreen,
-                        );
+                        // currentScreen = SubjectClassesPage(
+                        //   onFullScreenChanged: setFullScreen,
+                        // );
                       } else {
                         currentScreen = widget.initialScreen;
                       }

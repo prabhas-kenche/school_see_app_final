@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:school_see/assignments.dart';
+import 'package:school_see_app/assignments.dart';
 
 class Examtimetablescreen extends StatelessWidget {
   const Examtimetablescreen({super.key});
